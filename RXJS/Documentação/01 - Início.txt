@@ -1,2 +1,6 @@
 Rodar o projeto 
 ng s
+
+para usar uma observable, é preciso importar o pacote Observale do rxjs
+
+import { Observable } from 'rxjs';

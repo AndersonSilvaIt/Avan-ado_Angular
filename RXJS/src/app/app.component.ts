@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, Subscriber } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -43,16 +44,38 @@ export default class AppComponent implements OnInit {
         reject('Ops! Você não é o Eduardo');
       }
     })
+  }
+
+  
+  minhaObservale(nome: string): Observable<string> {
+
+    return new Observable(subscriber => {
+
+      if(nome === 'Eduardo'){
+        subscriber.next('Olá! ' + nome);
+        subscriber.next('Olá! ' + nome);
+      }else{  
+        subscriber.error('Ops! Deu erro!');
+      }
+    })
 
   }
 
   ngOnInit(): void {
+    // Promise
       /*this.minhaPromise('Eduardo')
       .then(result => console.log(result));*/
 
-      this.minhaPromise('José')
+      /*this.minhaPromise('José')
       .then(result => console.log(result))
-      .catch(erro => console.log(erro));      
+      .catch(erro => console.log(erro));      */
+      // Fim Usando Promise
+
+      //Observable
+      this.minhaObservale('')
+      .subscribe(
+        result => console.log(result),
+        erro => console.log(erro));
   }
 
 }
