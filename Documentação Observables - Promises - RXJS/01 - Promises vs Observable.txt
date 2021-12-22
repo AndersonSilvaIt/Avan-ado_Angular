@@ -1,0 +1,15 @@
+Promise
+A promise, ao fazer uma chamda de uma API calback é uma promessa de retornar algo
+
+pode retornar sucesso ou erro.
+
+Observable
+
+Ela retorna dados e erros também,
+caso ocorra um erro ela cancela o recebimento dos dados, caso contrário ela continua viva a requisição.
+é possível realizar o Retry também.
+
+Criado um projeto de Teste para implementar as Promises e Observables
+com as configurações mínimas e com css de estilo
+irá criar o projeto RXJS
+ng new RXJS --minimal=true
