@@ -1,0 +1,13 @@
+o observer nada mais é do que uma função para acompanhar o processamento dos dados, desde o início
+do processo até quando termina.
+        const observer = {
+          next: valor => console.log('Next: ' + valor),
+          error: erro => console.log('Erro: ' + erro),
+          complete: () => console.log('FIM')
+        }
+
+        const obs = this.minhaObservale('Eduardo');
+        obs.subscribe(observer);
+		
+Obs: os nomes das funções, precisam ser exatamente como o defaul "next" e "error",
+se colocar somente "erro" ele não trata o catch.

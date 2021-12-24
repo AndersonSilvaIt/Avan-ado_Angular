@@ -54,6 +54,7 @@ export default class AppComponent implements OnInit {
       if(nome === 'Eduardo'){
         subscriber.next('Olá! ' + nome);
         subscriber.next('Olá! ' + nome);
+        subscriber.complete();
       }else{  
         subscriber.error('Ops! Deu erro!');
       }
@@ -72,10 +73,21 @@ export default class AppComponent implements OnInit {
       // Fim Usando Promise
 
       //Observable
-      this.minhaObservale('')
+      /*this.minhaObservale('')
       .subscribe(
         result => console.log(result),
-        erro => console.log(erro));
+        erro => console.log(erro));*/
+
+
+        const observer = {
+          next: valor => console.log('Next: ' + valor),
+          erro: erro => console.log('Erro: ' + erro),
+          complete: () => console.log('FIM')
+        }
+
+        const obs = this.minhaObservale('Eduardo');
+        obs.subscribe(observer);
+
   }
 
 }
