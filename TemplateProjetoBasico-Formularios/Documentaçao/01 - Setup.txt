@@ -1,0 +1,51 @@
+ao baixar o projeto, realizar a instalação dos pacotes.
+
+npm install
+
+criar o componente de cadastro para usar os formulários
+ng g c demos/reactiveForms/cadastro
+
+é necessário adicionar o componente de reactive forms dentro de app.modules.ts
+
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
+
+imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    [RouterModule.forRoot(rootRouterConfig, { useHash: false})]
+  ],
+  
+no menu, criado mais um ítem, "Cadastro"
+
+          <li class="nav-item">
+            <a class="nav-link"  [routerLink]="['/cadastro']">Cadastro</a>
+          </li>          
+		  
+é necessário também, criar a rota para esse link
+
+para criar um controle de formulário, no ngOnInit do componente, é criaro uma variável com o campo que 
+desejar criar o controler, por exemplo "nome"
+
+let nome = new FormControl('');)
+
+e no HTML, para associar esse componente, basta usar a tag formControlName = "nome" (usar o mesmo
+nome informado na variável dentro do component).
+
+Porém para submeter vários items ao mesmo tempo, é preciso criar um grupo, 
+cadastroGroup : FormGroup;
+
+
+  ngOnInit() {
+
+    this.cadastroGroup = new FormGroup({
+       nome: new FormControl(''),
+       cpf: new FormControl('')
+    });
+  }
+  
+  e no HTML, também é preciso informar que está trabalhando com um grupo de itens de componente.
+<form novalidate [formGroup]="cadastroForm">  
+
+porém para realizar o Submit no angular, também é necessário configurar o Submit dentro do form.
+também é preciso configurar o submit para um método específico no qual irá usar a função de "Salvar"
