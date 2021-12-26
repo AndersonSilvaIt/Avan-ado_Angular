@@ -1,0 +1,15 @@
+para usar o FormBuilder é preciso injetar no construtor da classe do componente,
+
+no lugar de ficar criando um new para cadastro ítem do FormGroup, basta criar um array
+e usar o gb.group
+
+
+
+    this.cadastroForm = this.fb.group({
+       nome: [''],
+       cpf: [''],
+       email: [''],
+       senha: [''],
+       senhaConfirmacao: ['']
+    });
+	
