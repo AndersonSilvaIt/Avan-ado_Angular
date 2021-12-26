@@ -1,0 +1,2 @@
+Reactive forms são melhores, para realizar testes e etc.
+outro modelo é o Template-drivem forms
