@@ -3,6 +3,7 @@ criado uma classe do tipo Usuário
 dentro do componente de cadastro, é feito o Binding 
 
 o Object converter os dados de um formulário para um objeto.
+
   adicionarUsuario(){
     this.usuario = Object.assign({}, this.usuario, this.cadastroForm.value)
   }

@@ -1,0 +1,65 @@
+Implementado uma observable para realizar a validaçao do campo quando ele perde o foco e não
+a todo momento.
+
+criado o arquivo para realizar essa validação:
+generic-form-validator.ts
+
+
+no componente, é importado a referência dessa classe para implementar as validações
+
+import { ValidationMessages, GenericValidator, DisplayMessage } from './generic-form-validation';
+
+no construtor do app que quero fazer a validação, eu crio o range de mensagens.
+
+ constructor(private fb : FormBuilder)  
+  {
+
+    this.validationMessages = {
+      nome: {
+        required: 'O nome é requerido',
+        minLength: 'O nome precisa ter no mínimo 2 caracteres',
+        maxLength: 'O nome precisa ter no máximo 150 caracteres'
+      },
+      cpf: {
+        required: 'Informe o CPF',
+        cpf: 'CPF em formato inválido'
+      },
+      email: {
+        required: 'Informe o e-mail',
+        email: 'Email inválido'
+      },
+      senha: {
+        required: 'Informe a senha',
+        rangeLength: 'A senha deve possuir entre 6 e 15 caracteres'
+      },
+      senhaConfirmacao: {
+        required: 'Informe a senha novamente',
+        rangeLength: 'A senha deve possuir entre 6 e 15 caracteres',
+        equalTo: 'As senhas não conferem'
+      }
+    };
+
+    this.genericValidator = new GenericValidator(this.validationMessages);
+   }
+   
+   é implementado a interface AfterViewInit, para fazer a validação somente depois que o campo perder o foco.
+ 
+ para usar essa nova implementação, é necessário usar os Imports do VieChildren e etc ...
+ 
+ import { Component, OnInit, AfterViewInit, ElementRef, ViewChildren } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormControl, FormControlName } from '@angular/forms';
+
+
+ngAfterViewInit(): void {
+    
+  let controlBlurs : Observable<any>[] = this.formInputElements
+  .map((formControl: ElementRef) => fromEvent(formControl.nativeElement, 'blur'));
+
+  merge(...controlBlurs).subscribe(() => {
+    this.displayMessage = this.genericValidator.processarMensagens(this.cadastroForm);
+  });
+
+}
+
+no código, pego todos os elementos do formulário no evento Blur, e disparo a observable de uma vez só para todos
+usando o merge()  , ele dispara o subscribe uma única vez para todos os elementos.
