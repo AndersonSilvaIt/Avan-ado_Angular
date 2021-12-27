@@ -1,0 +1,58 @@
+Para implementar a validação, basta no formControl, informar o required
+
+
+    this.cadastroForm = this.fb.group({
+       nome: ['', Validators.required],
+       cpf: [''],
+       email: [''],
+       senha: [''],
+       senhaConfirmacao: ['']
+    });
+	
+propriedades dirty do formulário, indica se o campo já foi digitado algo
+touched indica se o campo já foi tocado (focos)
+
+                <div class="col-md-10">
+                    <input class="form-control" id="nome" type="text" placeholder="Nome (requerido)" formControlName="nome"/>
+
+                    <span class="text-danger" *ngIf="cadastroForm.get('nome').errors && (cadastroForm.get('nome').dirty || cadastroForm.get('nome').touched)">
+                        <p>Preecha o campo</p>
+                    </span>                    
+                </div>
+
+para isso é informado o *ngIf dentro do span, irá aparecer a mensagem de erro caso o campo já estiver sido preenchido alguma vez.
+
+tambem é adicionado uma classe para o campo caso estiver inválido.
+
+[ngClass]="{'is-invalid' : cadastroForm.get('nome').errors && (cadastroForm.get('nome').dirty || cadastroForm.get('nome').touched)}"/>
+
+                <div class="col-md-10">
+                    <input class="form-control" id="nome" type="text" placeholder="Nome (requerido)" formControlName="nome"
+                    [ngClass]="{'is-invalid' : cadastroForm.get('nome').errors && (cadastroForm.get('nome').dirty || cadastroForm.get('nome').touched)}"/>
+
+                    <span class="text-danger" *ngIf="cadastroForm.get('nome').errors && (cadastroForm.get('nome').dirty || cadastroForm.get('nome').touched)">
+                        <p>Preecha o campo</p>
+                    </span>                    
+                </div> 
+				
+<span><button class="btn btn-success" id="Registrar" [disabled]="!cadastroForm.valid" type="submit">Registrar</button></span>
+também é possível desabilitar o botão caso o formuário esteja errado.
+
+            <div  class="form-group">
+                <label class="col-md-2 control-label" form="email">E-mail</label>
+                <div class="col-md-10">
+                    <input class="form-control" id="email" type="text" placeholder="E-mail (requerido)" formControlName="email"
+                    [ngClass]="{'is-invalid' : cadastroForm.get('email').errors && (cadastroForm.get('email').dirty || cadastroForm.get('email').touched)}"
+                    />
+                    <span class="text-danger" *ngIf="cadastroForm.get('email')?.errors?.required && (cadastroForm.get('email').dirty || cadastroForm.get('email').touched)">
+                        <p>Preecha o campo Email</p>
+                    </span> 
+                    <span class="text-danger" *ngIf="cadastroForm.get('email')?.errors?.email && (cadastroForm.get('email').dirty || cadastroForm.get('email').touched)">
+                        <p>E-mail em formato inválido</p>
+                    </span>                                        
+                </div>
+            </div>
+No caso da validação do e-mail, estamos olhando por duas validações distintas, se é requirida e o tipo
+de email em formato válido, quando for assim, 
+cadastroForm.get('email')?.errors?.required 
+precisa verificar se a propriedade está diferente de nula usando o ?, caso contrário pode ocasionar outros erros.

@@ -1,0 +1,80 @@
+Existe um pacote já pronto do angular para realizar validações de CPF, CNPJ e etc...
+também usado para fazer máscaras de formulário.
+
+NG Brazil
+
+também existe um outro pacote para validações
+ng2-validation
+
+instalar os pacotes no projeto
+
+npm i ng-brazil
+
+o ng-brazil possui uma dependência de outro pacote que também precisa ser instalado.
+
+npm i -S angular2-text-mask text-mask-addons
+
+é necessário importar o NGBrazil no appmodules.
+
+import { NgBrazil } from 'ng-brazil'
+import { TextMask} from 'ng-brazil'
+
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgBrazil,
+    TextMask.TextMaskModule,
+    [RouterModule.forRoot(rootRouterConfig, { useHash: false})]
+  ],
+  
+
+implementado a máscara na classe do cadastro para CPF
+  MASKS = utilsBr.MASKS;
+  necessário importar o utilsBr de 'js-brasil'
+  
+ no html é implementado a máscara no campo
+ máscara: cpf [textMask]="{mask: MASKS.cpf.textMask}"
+ 
+ <input class="form-control" id="cpf" type="text" placeholder="CPF (requerido)" formControlName="cpf" cpf [textMask]="{mask: MASKS.cpf.textMask}"/>
+ 
+ instalar também o   ng2-validation
+ 
+ npm install ng2-validation --save
+ e importar no módulo.ts
+ 
+ import {CustomFormsModule} from 'ng2-validation'
+ 
+   imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgBrazil,
+    TextMask.TextMaskModule,
+    CustomFormsModule,
+    [RouterModule.forRoot(rootRouterConfig, { useHash: false})]
+  ],
+  
+
+implementado a senha para obrigatoriedade 6 a 15 caracteres
+
+senha: ['', CustomValidators.rangeLength([6,15])],
+
+agora implementado a validação direto no HTML.
+
+<span class="text-danger" *ngIf="cadastroForm.get('senha')?.errors?.rangeLength && (cadastroForm.get('senha').dirty || cadastroForm.get('senha').touched)">
+    <p>Tamanho Inválido</p>
+</span>                     
+
+
+let senha = new FormControl('', [Validators.required,  CustomValidators.rangeLength([6,15]) ]);
+let senhaConfirm = new FormControl('', [Validators.required,  CustomValidators.rangeLength([6,15]), CustomValidators.EqualTo(senha)]);
+
+    this.cadastroForm = this.fb.group({
+       nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(150)]],
+       cpf: ['', [Validators.required, NgBrazilValidators.cpf]],
+       email: ['', [Validators.required, Validators.email]],
+       senha: senha,
+       senhaConfirmacao: senhaConfirm
+    });
+Implementado as validações customizadas.

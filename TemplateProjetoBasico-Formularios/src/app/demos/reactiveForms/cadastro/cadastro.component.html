@@ -8,21 +8,39 @@
             <div  class="form-group">
                 <label class="col-md-2 control-label" form="nome">Nome Completo</label>
                 <div class="col-md-10">
-                    <input class="form-control" id="nome" type="text" placeholder="Nome (requerido)" formControlName="nome"/>
+                    <input class="form-control" id="nome" type="text" placeholder="Nome (requerido)" formControlName="nome"
+                    [ngClass]="{'is-invalid' : cadastroForm.get('nome').errors && (cadastroForm.get('nome').dirty || cadastroForm.get('nome').touched)}"/>
+
+                    <span class="text-danger" *ngIf="cadastroForm.get('nome').errors && (cadastroForm.get('nome').dirty || cadastroForm.get('nome').touched)">
+                        <p>Preecha o campo</p>
+                    </span>                    
                 </div>
+
+
             </div>
 
             <div  class="form-group">
                 <label class="col-md-2 control-label" form="cpf">CPF</label>
                 <div class="col-md-10">
-                    <input class="form-control" id="cpf" type="text" placeholder="CPF (requerido)" formControlName="cpf"/>
+                    <input class="form-control" id="cpf" type="text" placeholder="CPF (requerido)" formControlName="cpf" cpf [textMask]="{mask: MASKS.cpf.textMask}"/>
+                    <span class="text-danger" *ngIf="cadastroForm.get('cpf')?.errors?.cpf && (cadastroForm.get('cpf').dirty || cadastroForm.get('cpf').touched)">
+                        <p>CPF Inválido</p>
+                    </span>                                        
                 </div>
             </div>
             
             <div  class="form-group">
                 <label class="col-md-2 control-label" form="email">E-mail</label>
                 <div class="col-md-10">
-                    <input class="form-control" id="email" type="text" placeholder="E-mail (requerido)" formControlName="email"/>
+                    <input class="form-control" id="email" type="text" placeholder="E-mail (requerido)" formControlName="email"
+                    [ngClass]="{'is-invalid' : cadastroForm.get('email').errors && (cadastroForm.get('email').dirty || cadastroForm.get('email').touched)}"
+                    />
+                    <span class="text-danger" *ngIf="cadastroForm.get('email')?.errors?.required && (cadastroForm.get('email').dirty || cadastroForm.get('email').touched)">
+                        <p>Preecha o campo Email</p>
+                    </span> 
+                    <span class="text-danger" *ngIf="cadastroForm.get('email')?.errors?.email && (cadastroForm.get('email').dirty || cadastroForm.get('email').touched)">
+                        <p>E-mail em formato inválido</p>
+                    </span>                                        
                 </div>
             </div>
             
@@ -30,6 +48,9 @@
                 <label class="col-md-2 control-label" form="senha">Senha</label>
                 <div class="col-md-10">
                     <input class="form-control" id="senha" type="password" placeholder="Senha (requerido)" formControlName="senha"/>
+                    <span class="text-danger" *ngIf="cadastroForm.get('senha')?.errors?.rangeLength && (cadastroForm.get('senha').dirty || cadastroForm.get('senha').touched)">
+                        <p>Tamanho Inválido</p>
+                    </span>                     
                 </div>
             </div>
             
@@ -42,9 +63,21 @@
 
             <div class="form-group">
                 <div class="col-md-4 col-md-offset-2">
+                    <!--<span><button class="btn btn-success" id="Registrar" [disabled]="!cadastroForm.valid" type="submit">Registrar</button></span>-->
+                    <!--Comentado o botão acima, deixado somente para exemplo de como desabilitar o botão caso quiser-->
                     <span><button class="btn btn-success" id="Registrar" type="submit">Registrar</button></span>
                 </div>
             </div>
+
+            <div class="form-group">
+                <div class="col-md-4 col-md-offset-2">
+                    <p>Formulário válido: {{ cadastroForm.valid }}</p>
+                    <p>Formulário Tocado: {{ cadastroForm.touched }}</p>
+                    <p>Formulário Sujo: {{ cadastroForm.dirty }}</p>
+                    <p>Formulário Result: {{ formResult }}</p>
+                </div>
+            </div>
+
         </div>
     </form>
 </div>
