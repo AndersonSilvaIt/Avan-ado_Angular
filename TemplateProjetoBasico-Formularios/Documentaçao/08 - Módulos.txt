@@ -1,0 +1,46 @@
+Módulos servem para separar as responsabilidades da aplicação, por exemplo,
+um módulo de vendas, se o cliente não clicar na opção de vendas, os dados desse módulo ainda não estão carregados
+na memória, ele só carrega quando de fato for utilizar, deixando a aplicação mais performática.
+
+criado o arquivo navegacao.module.ts 
+export class NavegacaoModule,
+
+para declarar que esse é um módulo, é preciso usar o @NGModule
+
+Basta declarar os componentes utilizados e os imports que esse módulo irá utilizar,
+retirar a responsabilidade do app.module de exportar os componentes,
+
+
+dentro do app.module irá importar somente esse módulo
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NavegacaoModule,
+    NgBrazil,
+    TextMask.TextMaskModule,
+    CustomFormsModule,
+    [RouterModule.forRoot(rootRouterConfig, { useHash: false})]
+  ],
+  
+  e não os componentes conforme estava anteriormente.
+ dentro do novo módulo, irá implementar os componentes
+ @NgModule({
+    declarations: [
+        MenuComponent, 
+        HomeComponent, 
+        FooterComponent
+    ],
+    imports:[
+        CommonModule,
+        RouterModule
+    ],
+    exports: [
+        MenuComponent, 
+        HomeComponent, 
+        FooterComponent        
+    ]
+})
+
+também é necessário exportar, pois até então, esses componentes estão sendo vistos de forma interna desse módulo,
+então exportando, toda a aplicação tem acesso a eles.
