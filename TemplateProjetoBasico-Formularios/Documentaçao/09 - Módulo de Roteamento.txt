@@ -1,0 +1,54 @@
+atualmente o sistema está usando uma constante para roteamento dos links,
+rootRouterConfig
+
+porém no angular novo, é possível criar um módulo somente para isso.
+
+quando é criado uma aplicação angular, ele pergunta se deseja criar o arquivo de módulo de roteamento,
+no momento estamos criando na mão.
+
+import { NgModule } from '@angular/core'
+
+import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from './navegacao/home/home.component';
+import { SobreComponent } from './institucional/sobre/sobre.component';
+import { CadastroComponent } from './demos/reactiveForms/cadastro/cadastro.component';
+
+export const rootRouterConfig: Routes = [
+    { path: '', redirectTo: '/home', pathMatch: 'full'},
+    { path: 'home', component: HomeComponent},
+    { path: 'sobre', component: SobreComponent },
+    { path: 'cadastro', component: CadastroComponent }
+];
+
+@NgModule({
+    imports: [
+        RouterModule.forRoot(rootRouterConfig)
+    ],
+    exports: [
+        RouterModule
+    ]
+})
+
+export class AppRoutingModule {
+
+}
+
+alterado o arquivo app.route.ts que antes era somente uma constante, agora virou um módulo de roteamento.
+
+e dentro do arquivo app.module.ts 
+
+é trocado [RouterModule.forRoot(rootRouterConfig, { useHash: false})]
+por AppRoutingModule
+
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NavegacaoModule,
+    NgBrazil,
+    TextMask.TextMaskModule,
+    CustomFormsModule,
+    AppRoutingModule
+  ],
+  
+  
