@@ -1,0 +1,67 @@
+primeiro é criado um componente
+
+ng g c demos\arquitetura-componentes\produto-dashboard
+
+quando se cria um componente, automaticamente no AppModule é adicionado a referência desse componente.
+
+  declarations: [
+    AppComponent,
+    SobreComponent,
+    CadastroComponent,
+    ProdutoDashboardComponent
+  ],
+
+
+criado o módulo de produto
+
+produto.module.ts
+
+criado também o route de produtos
+
+produto.route.ts
+
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { ProdutoDashboardComponent } from './produto-dashboard/produto-dashboard.component';
+
+@NgModule({
+    declarations: [
+        ProdutoDashboardComponent
+    ],
+    imports: [],
+    exports: []
+})
+
+export class ProdutoModule {}
+
+não precisa exportar o Módulo Produto, ele será usado somente dentre esse mesmo módulo, produtos
+
+no arquivo de Rotas
+
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { ProdutoDashboardComponent } from './produto-dashboard/produto-dashboard.component';
+
+const produtoRouterConfig : Routes = [
+    { path: '', component: ProdutoDashboardComponent}
+];
+
+para criar o path do módulo de produto,
+é preciso criar a configuração dentro de app.routes.ts
+
+export const rootRouterConfig: Routes = [
+    { path: '', redirectTo: '/home', pathMatch: 'full'},
+    { path: 'home', component: HomeComponent},
+    { path: 'sobre', component: SobreComponent },
+    { path: 'cadastro', component: CadastroComponent },
+    { path: 'produtos', 
+                locadChildren: () => import('./demos/arquitetura-componentes/produto.module')}
+];
+
+
+Quando clicar no link de produto, é que irá carregar o módulo de Produtos.
+
+no chrome é possível fazer o teste de carregamento.
+
+na ferramentas de desenvolvedor/network é possível ver isso
