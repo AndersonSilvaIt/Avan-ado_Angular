@@ -1,0 +1,36 @@
+para obter um evento de um filho no JS usamos o document.getElementByTagName('')
+e usamos os eventos do JS.
+
+no angular isso é diferente.
+
+é implementado a interface AfterViewInit
+
+Só quando a view for carregada é que esse elemento ficará sendo observado.
+
+no html é colocado uma tag no elemento
+#teste
+
+<h1 #teste>Lista Produtos</h1>
+
+
+  ngAfterViewInit(): void {
+    
+    let clickTexto: Observable<any> = fromEvent(this.mensagemTela.nativeElement, 'click');
+  
+    clickTexto.subscribe(() => {
+      alert('Clicou no texto');
+      return;
+    });
+
+  }
+  
+ Também é possível interagir  com o componente
+ 
+   @ViewChild(ProdutoCountComponent, {static: false}) contador: ProdutoCountComponent
+   
+    console.log('Objeto do Contador: ', this.contador.produtos);
+	
+	o @ViewChild recupera somente um elemento, 
+	já o ViewChildren trás todos os elementos de um determinado formulário.
+	
+	
