@@ -1,16 +1,14 @@
-<p>produto-dashboard works!</p>
+<div class="container main-container">
 
-<p>produto-dashboard works!</p>
+    <h1>Lista Produtos</h1>
 
-<p>produto-dashboard works!</p>
+    <produto-count [produtos]="produtos"></produto-count>
 
-<p>produto-dashboard works!</p>
+    <div class="row text-center">
 
-<p>produto-dashboard works!</p>
+        <produto-card-detalhe class="col-md-4" *ngFor="let itemProduto of produtos;" 
+        [produto]="itemProduto"
+        (status)="mudarStatus($event)" ></produto-card-detalhe>
 
-<p>produto-dashboard works!</p>
-
-<p>produto-dashboard works!</p>
-
-<p>produto-dashboard works!</p>
-<p>produto-dashboard works!</p>
+    </div>
+</div>

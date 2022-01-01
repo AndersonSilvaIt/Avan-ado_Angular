@@ -1,0 +1,31 @@
+criado a model produto.ts
+
+criado o HTML dentro de produto-dashboard.component.html
+
+
+dentro de produto.module.ts é registrado a linguagem de moeda que será usado para preço:
+
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt'
+
+registerLocaleData(localePt)
+
+
+criado o componente filho: 
+produto-card-detalhe
+
+onde esse terá o html a listagem dos produtos, porém a lista está no componente pai:
+
+ao criar o componente filho, é passado os dados através de um Input
+
+export class ProdutoDetalheComponent {
+
+    @Input()
+    produto: Produto; // isso aqui será uma propriedade do item do html
+}
+
+
+e no html do pai quando for chamar o componente filho, também passa a listagem
+ngFor="let itemProduto of produtos" [produto]="itemProduto"
+
+<produto-card-detalhe class="col-md-4" *ngFor="let itemProduto of produtos" [produto]="itemProduto"></produto-card-detalhe>

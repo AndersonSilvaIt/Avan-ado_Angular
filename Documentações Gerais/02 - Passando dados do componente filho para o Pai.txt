@@ -1,0 +1,1 @@
+no componente filho, é implemento o evento para o click do botão, esse crick o componente ái que irá tratar
