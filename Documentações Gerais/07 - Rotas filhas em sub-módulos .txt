@@ -1,0 +1,46 @@
+criado o componente EditarProdutoComponent
+
+no arquivo produto.route.ts 
+é implementado uma nova rota para editar o produto
+
+const produtoRouterConfig: Routes = [
+    { path: '', component: ProdutoDashboardComponent },
+    { path: 'editar/:id', component: EditarProdutoComponent }
+];
+
+no html, basta informar a rota
+<a [routerLink]="['editar/', produto.id]" class="btn btn-primary">Editar</a>
+
+no browser a rota irá ficar produtos/editar/1 , pois essa rota está dentro do módulo de produtos.
+
+se digiar a rota e dar um enter ele vai dar proble,a so funciona clicando no botão,
+para resolver no arquivo raiz de app.module.ts
+
+é preciso apagar a linha {provide: APP_BASE_HREF, useValue: '/'}
+
+e no arquivo html raiz, index.html
+basta implementar esse código.
+
+  <base href="/">
+  
+ para usar uma rota filha dentro de produto, editar por exemplo:
+ 
+     { path: '', component: ProdutoDashboardComponent, 
+        children: [
+            { path: 'editar/:id', component: EditarProdutoComponent }
+        ] 
+    },
+	
+porém dessa form ainda não irá funcionar, é preciso criar um app componente principal para produtos.
+criado o arquivo produto.app.component.ts
+
+import { Component } from "@angular/core";
+
+@Component({
+    selector: 'produto-app-root',
+    template: '<router-outlet></router-outlet>'
+})
+
+export class ProdutoAppComponent { }
+
+é necessário registrar esse componente dentro de produto.module.ts
