@@ -1,0 +1,15 @@
+para saber onde a aplicação passou, por qual rota foi chamado.
+
+no app.route.ts basta acrescentar o parâmetro enableTracing: true
+
+@NgModule({
+    imports: [
+        RouterModule.forRoot(rootRouterConfig, { enableTracing: true})
+    ],
+    exports: [
+        RouterModule
+    ]
+})
+
+quando for navegar, basta olhar no F12 os dados do console.
+Se atentar para não usar isso em produção, pois consome muitos dados do console.

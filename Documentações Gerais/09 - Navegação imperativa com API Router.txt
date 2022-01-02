@@ -1,0 +1,9 @@
+para redirecionar a aplicação para outro caminho específico, 
+basta usar o router.navite([])
+
+  salvar(){
+
+    // fazer comunicação com back end
+    this.router.navigate(['/produtos']);
+    
+  }
