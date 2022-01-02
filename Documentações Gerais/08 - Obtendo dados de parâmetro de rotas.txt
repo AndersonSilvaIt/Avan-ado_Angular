@@ -1,0 +1,46 @@
+criado a classe de produto.service.ts
+para simular um backend
+
+também é necessário registrar esse serviço dentro de produto.module.ts
+
+@NgModule({
+    declarations: [ 
+        ProdutoAppComponent,
+        ProdutoDashboardComponent,
+        ProdutoDetalheComponent,
+        ProdutoCountComponent,
+        EditarProdutoComponent
+    ],
+    imports: [ 
+        CommonModule,
+        ProdutoRoutingModule 
+    ],
+    providers: [
+        ProdutoService
+    ],
+    exports: []
+})
+
+dentro de produto.detalhe.ts é onde será usado esse serviço,
+
+no construtor, é usado o ActivatedRoute, é onde irá buscar os parâmetros que vier na rota.
+
+
+    this.route.params
+    .subscribe(params => {
+        console.log(params['id']);
+    });
+	
+	esse nome "id" precisa ser o mesmo informado na configuração das rotas de produto
+	
+	arquivo produto.route.ts
+const produtoRouterConfig: Routes = [
+    { path: '', component: ProdutoAppComponent, 
+        children: [
+            { path: '', component: ProdutoDashboardComponent },
+            { path: 'editar/:id', component: EditarProdutoComponent }
+        ] 
+    },
+];
+
+Note que é o mesmo nome, "id"
