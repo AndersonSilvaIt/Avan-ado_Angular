@@ -1,0 +1,10 @@
+ Para deixar o link em destaque, que foi clicado no menu, Cadastro por exemplo,
+ no html é implementado o routerLinkActive="active", o "active" é uma classe.
+ 
+ o routerLinkActive verificar se o link está clicado e muda a classe dele.
+ 
+            <a class="nav-link" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active"  [routerLink]="['/home']">Home</a>
+			
+			routerLinkActiveOptions ficará ativo somente se o link clicado for da mesma rota que aparece lá em cima 
+			no caso da home, se usar a rota '' ele irá para home, mas não irá marcar o link, se usar o '/home' ai ele pinta o link.
+			
