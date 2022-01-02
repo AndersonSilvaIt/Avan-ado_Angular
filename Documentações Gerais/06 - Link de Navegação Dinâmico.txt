@@ -1,0 +1,19 @@
+interface nav {
+  link: string,
+  name: string,
+  exact: boolean,
+  admin: boolean
+}
+
+criado uma interface dentro de menu.component.ts
+para criar os links dinâmicos.
+
+
+no html, basta usar o ngFor para criar os menus dinâmicos
+
+       
+          <li class="nav-item" *ngFor="let item of nav">
+              <a class="nav-link" [routerLink]="item.link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: item.exact }">
+                {{ item.name}} 
+              </a>
+          </li> 
