@@ -1,0 +1,20 @@
+Criado um componente novo 
+
+ng g c navegacao/notFound
+
+criado o arquivo para caso não encontre alguma URL,
+
+é necessário implementar no arquivo de rotas,
+export const rootRouterConfig: Routes = [
+    { path: '', redirectTo: '/home', pathMatch: 'full'},
+    { path: 'home', component: HomeComponent},
+    { path: 'sobre', component: SobreComponent },
+    { path: 'cadastro', component: CadastroComponent },
+    { path: 'produtos', 
+                loadChildren: () => import('./demos/arquitetura-componentes/produto.module')
+            .then(m => m.ProdutoModule)},
+
+    { path: '**', component: NotFoundComponent  },
+];
+
+porém a rota do NotFound, precisa ser o último a ser resolvido.
