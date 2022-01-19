@@ -1,0 +1,48 @@
+criado a classe para resolver as rotas
+
+produto.resolve.ts
+
+também é preciso registrar esse arquivo no produto.module.ts
+
+import { Injectable } from '@angular/core'
+import { ActivatedRouteSnapshot, Resolve } from '@angular/router'
+import { Produto } from '../models/produto'
+import { ProdutoService } from './produto.service'
+
+@Injectable()
+export class ProdutoResolve implements Resolve<Produto[]> {
+
+    constructor(private produtoService: ProdutoService)
+    { }
+
+    resolve(route: ActivatedRouteSnapshot) {
+        
+        return this.produtoService.obterTodos(route.params.estado);
+    }
+}
+
+esse arquivo ele pega o parâmetro que está vindo, no caso "estado", 
+e atra´vez do serviço, ele trata os dados para filtrar.
+
+    obterTodos(estado: string): Produto[]{
+
+        if(estado === 'ativos'){
+          return this.produtos.filter( produto => produto.ativo);
+        }
+
+        return this.produtos;
+    }
+	
+	ajustado o código obterTodos, para receber um padrâmetro que está vindo da rota.
+	
+no arquivo de rota, é alterado também para receber outros parâmetros.
+
+const produtoRouterConfig: Routes = [
+    { path: '', component: ProdutoAppComponent, 
+        children: [
+            { path: '', redirectTo: 'todos'},
+            { path: ':estado', component: ProdutoDashboardComponent },
+            { path: 'editar/:id', component: EditarProdutoComponent }
+        ] 
+    },
+];

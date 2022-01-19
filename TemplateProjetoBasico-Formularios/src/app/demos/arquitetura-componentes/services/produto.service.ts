@@ -52,7 +52,12 @@ export class ProdutoService {
           }];
     }
 
-    obterTodos(){
+    obterTodos(estado: string): Produto[]{
+
+        if(estado === 'ativos'){
+          return this.produtos.filter( produto => produto.ativo);
+        }
+
         return this.produtos;
     }
 

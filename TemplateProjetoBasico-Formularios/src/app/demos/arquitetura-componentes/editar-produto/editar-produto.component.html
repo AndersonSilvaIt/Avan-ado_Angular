@@ -11,7 +11,7 @@
             <p *ngSwitchCase="false">Fora de estoque</p>
         </div>
 
-        <div *ngIf="produto.atvo" class="card-body">
+        <div *ngIf="produto.ativo" class="card-body">
             <div>
                 <h4> {{  produto.valor | currency:'BRL': 'symbol':'1.2-2':'pt' }} </h4>
                 <ng-content select=".corre"></ng-content>
