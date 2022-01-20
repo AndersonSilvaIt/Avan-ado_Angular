@@ -1,0 +1,33 @@
+criado o arquivo de pipe customizado filesize.component.ts
+
+também precisa registrar o pipe no app.module.ts
+
+  declarations: [
+    AppComponent,
+    SobreComponent,
+    CadastroComponent,
+    FilmesComponent,
+    FileSizePipe
+  ],
+  
+export class FileSizePipe implements PipeTransform {
+    
+    transform(size: number) {
+        
+        let tamanhoCalculado = (size / (1024 * 1024))
+        let extension = ' MB'
+
+        if (tamanhoCalculado > 1024) {
+            tamanhoCalculado = (tamanhoCalculado / 1024);
+            extension = ' GB'
+        }
+
+        return tamanhoCalculado.toFixed(2) + extension;
+    }
+}
+
+implementado o arquivo para customização de mensagem para tamhno de GB / MG e etc ...
+
+
+<td> {{ filme.tamanho | filesize }} </td>
+
