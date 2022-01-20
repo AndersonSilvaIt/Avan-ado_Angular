@@ -1,0 +1,55 @@
+Implementado o módulo Admin...
+
+Em questão de segurança é bom implementar o guarda.
+
+na configuração do módulo que roda em LazyLoading, é implementado o Guarda para ver se ele tem 
+permissão ou não de rodar, usando o canLoad.
+
+        loadChildren: () => import('./admin/admin.module')
+            .then(m => m.AdminModule),
+        canLoad: []},...
+		
+implementado o guarda de rota
+app.guard.ts
+
+também é necessárop registrar dentro de app.module.ts
+
+no AuthGuard implemento se tem permissão ou não de fazer o load, de acordo com alguma permissão e etc.
+
+e no app.route.ts é usado esse AuthGuard
+
+        loadChildren: () => import('./admin/admin.module')
+            .then(m => m.AdminModule),
+        canLoad: [AuthGuard]},
+		
+implementado também o canActivate...
+
+Pode baixar o módulo, mas não pode acessar ( ativar o módulo para o usuário ).
+
+canDeactivate bloqueia você sair de uma tela sem terminar de preencher os dados,
+exemplo rede social, você está criando um post e de repente clica em algum outro botão ou link,
+ele pergunta se realmente deseja sair sem fazer a puclicação e etc ...
+
+dentro de cadastro.component.ts é criad oa variável mudancasNaoSalvas
+que irá verificar se fez alterações ou não ...
+
+
+ao implementar o cadastro.guard.ts ele implementa o Candeactivate passando o componente que irá 
+validar 
+
+implements CanDeactivate<CadastroComponent>
+
+    canDeactivate(component: CadastroComponent): boolean {
+
+        if (component.mudancasNaoSalvas) 
+            return window.confirm('Tem certeza que deseja abandonar o preenchimento do formulário?');
+
+        return true;
+    }
+	
+dentro do app.route.ts é informado o Guard no canDeactivate
+
+    { path: 'cadastro', component: CadastroComponent, canDeactivate: [CadastroGuard] },
+	
+	
+		

@@ -30,7 +30,13 @@ nav: Nav[] = [
     name: 'Produtos',
     exact: false,
     admin: false
-  }
+  },
+  {
+    link: '/admin',
+    name: 'Admin',
+    exact: false,
+    admin: false
+  }  
 ];
 
 }

@@ -12,6 +12,8 @@ import { SobreComponent } from './institucional/sobre/sobre.component';
 import { CadastroComponent } from './demos/reactiveForms/cadastro/cadastro.component';
 import { NavegacaoModule } from './navegacao/navegacao.module';
 import { AppRoutingModule } from './app.routes';
+import { AuthGuard } from './services/app.guard';
+import { CadastroGuard } from './services/cadastro.guard';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { AppRoutingModule } from './app.routes';
     AppRoutingModule
   ],
   providers: [
-    {provide: APP_BASE_HREF, useValue: '/'}
+    { provide: APP_BASE_HREF, useValue: '/' },
+    AuthGuard,
+    CadastroGuard
   ],
   bootstrap: [AppComponent]
 })
