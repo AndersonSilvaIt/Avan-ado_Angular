@@ -1,0 +1,25 @@
+Pipes servem para formatar de forma correta os dados expostos no Angular.
+
+as configurações são feitas usando o caracteres PIPE |
+
+date 	  ==> formata a data
+
+titlecase ==> coloca a primeira letra de cadas palavra como maiúscula
+
+currency  ==> formatação de moeda
+
+para a configuração de moeda, é preciso implementar o locale, colocar no app.module.ts
+
+import { registerLocaleData } from '@angular/common';
+import localePT from '@angular/common/locales/pt'
+registerLocaleData(localePT)
+
+implementado o registro dentro de app.module.ts
+
+                <img [src]="filme.imagem" style="padding-bottom: 5px;">
+                <td> {{ filme.nome | titlecase }} </td>
+                <td> {{ filme.dataLancamento | date:"dd/MM/yyyy" }} </td>
+                <td> {{ filme.valor | currency:'BRL':'symbol':'1.2-2':'pt' }} </td>
+                <td> {{ filme.tamanho }} </td>
+				
+Para implementar os Pipes básicos.
