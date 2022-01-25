@@ -1,12 +1,21 @@
 import { Component, OnInit } from "@angular/core";
 import { Filme } from "./filme";
+import { ImageFormaterPipe } from "./image.pipe";
 
 @Component({
   selector: "app-filmes",
   templateUrl: "./filmes.component.html",
+  providers : [
+    ImageFormaterPipe
+  ]
 })
+  
 export class FilmesComponent implements OnInit {
   filmes: Filme[];
+
+  mapped: Filme[];
+
+  constructor(private imageFormat : ImageFormaterPipe) { }
 
   ngOnInit() {
     this.filmes = [
@@ -21,30 +30,41 @@ export class FilmesComponent implements OnInit {
         nome: "O Poderoso Chefão",
         dataLancamento: new Date("01/12/1972"),
         valor: 200.00,
-        imagem: "sonhoLiberdade.jpg",
+        imagem: "poderosoChefaoI.jpg",
         tamanho: "1342177280",
       },
       {
         nome: "Batman: O Cavaleiro das Trevas",
         dataLancamento: new Date("01/08/2008"),
         valor: 70.00,
-        imagem: "sonhoLiberdade.jpg",
+        imagem: "Batman2008.jpg",
         tamanho: "719974720",
       },
       {
         nome: "O Poderoso Chefão 2",
         dataLancamento: new Date("12/01/1974"),
         valor: 120.00,
-        imagem: "sonhoLiberdade.jpg",
+        imagem: "poderosoChefaoII.jpg",
         tamanho: "1254589899",
       },
       {
         nome: "Pulp Fiction: Tempo de Violência",
         dataLancamento: new Date("08/01/1994"),
         valor: 190.00,
-        imagem: "sonhoLiberdade.jpg",
+        imagem: "",
         tamanho: "773039680",
       },
     ];
+
+    this.mapped = this.filmes.map(filme => {
+      return {
+        nome: filme.nome,
+        dataLancamento: filme.dataLancamento,
+        valor: filme.valor,
+        tamanho: filme.tamanho,
+        imagem: this.imageFormat.transform(filme.imagem, 'default', true)
+      }
+    });
+
   }
 }

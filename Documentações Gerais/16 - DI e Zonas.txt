@@ -1,0 +1,36 @@
+Criado os componente 
+
+bar.component.html
+bar.component.ts
+bar.service.ts
+bar.module.ts
+
+o componente também é registrado dentro do módulo
+app.module.ts
+
+
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NavegacaoModule,
+    NgBrazil,
+    TextMask.TextMaskModule,
+    CustomFormsModule,
+    AppRoutingModule,
+    BarModule
+  ],
+  
+ é preciso registrar o serviço também dentro de Providers no app.module.ts
+ 
+ outro meio de usa a DI
+ 
+ @Component({
+  selector: 'app-bar',
+  templateUrl: './bar.component.html',
+  providers: [
+    { provide: BarServices, useClass: BarServices }
+  ]
+})
+
+implementa diretamente dentro do component.

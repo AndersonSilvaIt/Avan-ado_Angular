@@ -19,6 +19,10 @@ export const rootRouterConfig: Routes = [
                 loadChildren: () => import('./demos/arquitetura-componentes/produto.module')
             .then(m => m.ProdutoModule)
     },
+    { path: 'bar', 
+                loadChildren: () => import('./demos/bar-di-zones/bar.module')
+            .then(m => m.BarModule)
+    },    
     {
         path: 'admin',
         loadChildren: () => import('./admin/admin.module')
@@ -30,13 +34,11 @@ export const rootRouterConfig: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(rootRouterConfig, { enableTracing: true})
+        RouterModule.forRoot(rootRouterConfig, { enableTracing: false})
     ],
     exports: [
         RouterModule
     ]
 })
 
-export class AppRoutingModule {
-
-}
+export class AppRoutingModule { }

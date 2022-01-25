@@ -1,0 +1,36 @@
+Criado o arquivo de um pipe customizado para imagem
+
+ImageFormaterPipe
+
+esse pipe será usado diretamente no componente, normalmente a formatação é feita dentro do html,
+porém é possível fazer a formatação dentro do componente.
+
+esse imageFormat também precisa registrar nos módulos do app..
+
+E aonde eu for usar esse pipe, eu implemento ele dentro de providers
+
+@Component({
+  selector: "app-filmes",
+  templateUrl: "./filmes.component.html",
+  providers : [
+    ImageFormaterPipe
+  ]
+})
+
+  providers : [
+    ImageFormaterPipe
+  ]
+  
+ esse provider é injetado por DI dentro do construtor.
+ 
+ basta realizar o mapeamento passando os dados da imagem dentro da listagem de filmes.
+ 
+     this.mapped = this.filmes.map(filme => {
+      return {
+        nome: filme.nome,
+        dataLancamento: filme.dataLancamento,
+        valor: filme.valor,
+        tamanho: filme.tamanho,
+        imagem: this.imageFormat.transform(filme.imagem, 'default', true)
+      }
+    });

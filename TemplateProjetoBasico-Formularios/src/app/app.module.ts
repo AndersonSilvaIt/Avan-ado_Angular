@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Provider } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { APP_BASE_HREF } from '@angular/common';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
@@ -20,6 +20,16 @@ import { AuthGuard } from './services/app.guard';
 import { CadastroGuard } from './services/cadastro.guard';
 import { FilmesComponent } from './demos/pipes/filmes/filmes.component';
 import { FileSizePipe } from './demos/pipes/filmes/filesize.component';
+import { ImageFormaterPipe } from './demos/pipes/filmes/image.pipe';
+import { BarModule } from './demos/bar-di-zones/bar.module';
+import { BarServices } from './demos/bar-di-zones/bar.service';
+
+// essa é uma maneira de registrar um serviço ..., cria uma listagem aqui e depois coloca
+// essa variável dentro dos providers do múdulo ...
+
+//export const BAR_PROVIDERS: Provider[] = [
+//  BarServices
+//];
 
 @NgModule({
   declarations: [
@@ -27,7 +37,8 @@ import { FileSizePipe } from './demos/pipes/filmes/filesize.component';
     SobreComponent,
     CadastroComponent,
     FilmesComponent,
-    FileSizePipe
+    FileSizePipe,
+    ImageFormaterPipe
   ],
   imports: [
     BrowserModule,
@@ -37,12 +48,17 @@ import { FileSizePipe } from './demos/pipes/filmes/filesize.component';
     NgBrazil,
     TextMask.TextMaskModule,
     CustomFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BarModule.forRoot({
+      unidadeId: 1000,
+      unidadeToken: 'adfasdklçkiopi'
+    })
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
     AuthGuard,
-    CadastroGuard
+    CadastroGuard,
+    //BAR_PROVIDERS
   ],
   bootstrap: [AppComponent]
 })
