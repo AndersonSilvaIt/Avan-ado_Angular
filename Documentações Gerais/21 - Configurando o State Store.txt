@@ -1,0 +1,14 @@
+implementado a classe para realziar o store
+
+todo.store.ts
+
+é preciso registrar dentro do providers do módulo.
+
+todo.module.ts
+
+    providers: [
+        TasksService,
+        Store
+    ],
+	
+	
