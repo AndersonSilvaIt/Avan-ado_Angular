@@ -1,0 +1,20 @@
+No serviço, é implementado o httpClient no construtor
+
+Para issom no módulo, é preciso registrar o HttpClientModule
+    imports: [
+        CommonModule,
+        HttpClientModule
+    ],
+	
+O componente todo => todo.component.ts
+
+na rota /todo, quando for chamada, irá usar o template todo.component.html
+dentro desse html, é chamado os outros componentes
+
+<tasks class="col-md-4"></tasks>
+<tasks-iniciadas class="col-md-4"></tasks-iniciadas>
+<tasks-finalizadas class="col-md-4"></tasks-finalizadas>
+
+
+e dentro de cada componente, é chamado o todolist, passando a lista de Tasks como parâmetro
+
