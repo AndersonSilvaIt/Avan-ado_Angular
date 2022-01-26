@@ -44,6 +44,12 @@ nav: Nav[] = [
     admin: false
   },
   {
+    link: '/todo',
+    name: 'To do',
+    exact: false,
+    admin: false
+  },
+  {
     link: '/admin',
     name: 'Admin',
     exact: false,

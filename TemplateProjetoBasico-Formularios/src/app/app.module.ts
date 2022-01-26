@@ -23,6 +23,7 @@ import { FileSizePipe } from './demos/pipes/filmes/filesize.component';
 import { ImageFormaterPipe } from './demos/pipes/filmes/image.pipe';
 import { BarModule } from './demos/bar-di-zones/bar.module';
 import { BarServices } from './demos/bar-di-zones/bar.service';
+import { TodoModule } from './demos/todo-list/todo.module';
 
 // essa é uma maneira de registrar um serviço ..., cria uma listagem aqui e depois coloca
 // essa variável dentro dos providers do múdulo ...
@@ -52,7 +53,8 @@ import { BarServices } from './demos/bar-di-zones/bar.service';
     BarModule.forRoot({
       unidadeId: 1000,
       unidadeToken: 'adfasdklçkiopi'
-    })
+    }),
+    TodoModule
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },

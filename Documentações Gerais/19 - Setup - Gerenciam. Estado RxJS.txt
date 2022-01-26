@@ -1,0 +1,27 @@
+Criado os componentes para o Todo.
+
+No módulo principal, é registrado esse módulo.
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NavegacaoModule,
+    NgBrazil,
+    TextMask.TextMaskModule,
+    CustomFormsModule,
+    AppRoutingModule,
+    BarModule.forRoot({
+      unidadeId: 1000,
+      unidadeToken: 'adfasdklçkiopi'
+    }),
+    TodoModule
+  ],
+  
+ Implementado também a rota da component
+ 
+Criado os componentes de TodoList, listagem de tarefas,
+
+criado o arquivo json com as taregas já simuladas.
+
+Para rodar uma "API" fictícia: (no caso do arquivo json)
+cd ./src/app/demos/todo-list json-server todo.db.json

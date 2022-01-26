@@ -1,0 +1,10 @@
+RxJS ==> Biblioteca JS 
+
+NgRX ==> Biblioteca para gestão de estado
+
+Redux ==> Biblioteca para gestão de estado
+
+Akitra ==> Biblioteca para gestão de estado
+
+Nesse projeto, iremos utilizar no RxJS, utilizado para gerenciamento mais simples de estado.
+
