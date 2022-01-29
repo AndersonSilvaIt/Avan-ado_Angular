@@ -13,14 +13,32 @@ export class TasksService {
     getTodoList$: Observable<Task[]> = this.http
         .get<Task[]>('http://localhost:3000/todolist')
         .pipe(
-            tap(next => this.store.set('todolist', next))
-        );
+            tap(next => this.store.set('todolist', next)));
 
     // Ambos os métodos fazem a mesma coisa ... a diferença é que a de cima, fica sendo uma propriedade
     //getToDoList() : Observable<Task[]> {
     //    return this.http
     //        .get<Task[]>('http://localhost:3000/todolist')
     //}
+
+
+    toggle(event: any){
+        this.http
+        .put(`http://localhost:3000/todolist/${event.task.id}`, event.task)
+        .subscribe(() => { 
+            const value = this.store.value.todolist;
+            const todolist = value.map((task : Task) => {
+                if(event.task.id === task.id){
+                    return { ...task, ...event.task };
+                }else{
+                    return task;
+                }
+            });
+
+            this.store.set('todolist', todolist);
+         });
+    }
+
 }
 
 function tep(tep: any): Observable<Task[]> {
