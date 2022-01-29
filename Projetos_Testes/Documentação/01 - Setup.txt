@@ -1,0 +1,7 @@
+Para criar o Projeto via cmd
+
+ng new unit-testes
+
+Habilitar roteamento e usar o css
+
+para testar a aplicação, usar o ng test
